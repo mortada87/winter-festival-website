@@ -1,29 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
-  
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div style={{
-        minHeight: '100vh',
-        background: '#1e293b',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <div>Loading...</div>
-      </div>
-    );
-  }
-
   return (
     <div style={{
       minHeight: '100vh',
@@ -148,7 +125,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Countdown Section */}
+      {/* Static Festival Info Section */}
       <section style={{
         padding: '4rem 2rem',
         background: 'linear-gradient(135deg, rgba(147, 51, 234, 0.3), rgba(59, 130, 246, 0.3))'
@@ -163,17 +140,8 @@ export default function Home() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
           }}>
-            Next Festival Countdown
+            Next Winter Festival
           </h2>
-          
-          <p style={{
-            fontSize: '1.25rem',
-            marginBottom: '3rem',
-            lineHeight: '1.6'
-          }}>
-            Mark your calendars for our next enchanting winter festival celebration on{' '}
-            <span style={{ fontWeight: 'bold', color: '#f472b6' }}>December 15th, 2026</span>!
-          </p>
           
           <div style={{
             background: 'rgba(147, 51, 234, 0.2)',
@@ -181,21 +149,46 @@ export default function Home() {
             borderRadius: '1rem',
             border: '1px solid rgba(147, 51, 234, 0.3)'
           }}>
-            <h3 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '2rem' }}>Save the Date! 🎄</h3>
+            <h3 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '2rem' }}>
+              🎄 December 15th, 2026 🎄
+            </h3>
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-              gap: '1rem',
-              marginBottom: '2rem'
+              gap: '2rem',
+              marginBottom: '2rem',
+              fontSize: '1.2rem'
             }}>
-              <div>📅 December 15th, 2026</div>
-              <div>🕕 6:00 PM - Late</div>
-              <div>❄️ Winter Wonderland</div>
+              <div style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '0.5rem' }}>
+                📅<br />December 15th, 2026
+              </div>
+              <div style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '0.5rem' }}>
+                🕕<br />6:00 PM - Late
+              </div>
+              <div style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '0.5rem' }}>
+                ❄️<br />Winter Wonderland
+              </div>
             </div>
-            <p style={{ lineHeight: '1.6' }}>
-              Join us for another year of magical fortune telling, enchanting storytelling, 
+            <p style={{ lineHeight: '1.6', fontSize: '1.1rem' }}>
+              Join us for magical fortune telling, enchanting storytelling, 
               delicious cacao ceremonies, and unforgettable winter memories!
             </p>
+            
+            <div style={{
+              marginTop: '2rem',
+              background: 'rgba(251, 146, 60, 0.2)',
+              padding: '1.5rem',
+              borderRadius: '0.5rem',
+              border: '1px solid rgba(251, 146, 60, 0.3)'
+            }}>
+              <h4 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                🎟️ Early Bird Registration
+              </h4>
+              <p>
+                Sign up for our newsletter to be the first to know when tickets go on sale! 
+                Early birds get special discounts and exclusive festival perks.
+              </p>
+            </div>
           </div>
         </div>
       </section>
