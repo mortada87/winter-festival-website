@@ -82,11 +82,11 @@ export default function Footer() {
               <a href="#cacao" className="block text-blue-100 hover:text-white transition-colors duration-300">
                 Cacao Challenges
               </a>
-              <a href="#" className="block text-blue-100 hover:text-white transition-colors duration-300">
-                Event Schedule
+              <a href="#gallery" className="block text-blue-100 hover:text-white transition-colors duration-300">
+                Photo Gallery
               </a>
-              <a href="#" className="block text-blue-100 hover:text-white transition-colors duration-300">
-                Tickets
+              <a href="#countdown" className="block text-blue-100 hover:text-white transition-colors duration-300">
+                Next Festival
               </a>
             </div>
           </motion.div>

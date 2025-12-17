@@ -1,11 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Snowflake, Star, Coffee, Book, Gem, ArrowRight } from 'lucide-react';
+import { Snowflake, Star, Coffee, Book, Gem, ArrowRight, Camera, Calendar } from 'lucide-react';
 import SnowfallAnimation from '@/components/SnowfallAnimation';
 import FortuneSection from '@/components/FortuneSection';
 import StorytellingSection from '@/components/StorytellingSection';
 import CacaoSection from '@/components/CacaoSection';
+import PhotoGallery from '@/components/PhotoGallery';
+import CountdownTimer from '@/components/CountdownTimer';
 import Footer from '@/components/Footer';
 
 const fadeInUp = {
@@ -73,6 +75,14 @@ export default function Home() {
               <Coffee className="w-6 h-6 mr-2" />
               <span className="text-lg">Cacao Recipes</span>
             </div>
+            <div className="flex items-center text-cyan-200">
+              <Camera className="w-6 h-6 mr-2" />
+              <span className="text-lg">Photo Gallery</span>
+            </div>
+            <div className="flex items-center text-purple-200">
+              <Calendar className="w-6 h-6 mr-2" />
+              <span className="text-lg">Next Festival</span>
+            </div>
           </motion.div>
           
           <motion.button
@@ -94,6 +104,12 @@ export default function Home() {
       
       {/* Cacao Recipe Section */}
       <CacaoSection />
+      
+      {/* Photo Gallery Section */}
+      <PhotoGallery />
+      
+      {/* Countdown Timer Section */}
+      <CountdownTimer />
       
       {/* Footer */}
       <Footer />
