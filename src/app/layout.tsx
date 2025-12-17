@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Winter Festival - Magic, Stories & Cacao",
+  title: "Winter Festival - Magic, Stories & Cacao | 2026",
   description: "Join our magical winter festival featuring fortune telling, enchanting storytelling, and delicious cacao recipe challenges. A cozy celebration of the festive season.",
   keywords: "winter festival, fortune telling, storytelling, cacao recipes, winter celebration, festive season",
   openGraph: {
-    title: "Winter Festival - Magic, Stories & Cacao",
+    title: "Winter Festival - Magic, Stories & Cacao | 2026",
     description: "Join our magical winter festival featuring fortune telling, enchanting storytelling, and delicious cacao recipe challenges.",
     type: "website",
   },
