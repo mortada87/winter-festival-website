@@ -1,13 +1,87 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
+// Simple snowflake component without complex state
+function SnowflakeEffect() {
+  const [snowflakes, setSnowflakes] = useState<Array<{id: number; left: number; delay: number}>>([]);
+
+  useEffect(() => {
+    // Create snowflakes once on mount
+    const flakes = Array.from({length: 30}, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      delay: Math.random() * 3
+    }));
+    setSnowflakes(flakes);
+
+    // Add CSS animation to document head
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes snowfall {
+        0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+      }
+      .snowflake {
+        position: absolute;
+        font-size: 18px;
+        color: rgba(255,255,255,0.8);
+        animation: snowfall 8s linear infinite;
+        user-select: none;
+        pointer-events: none;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      // Cleanup on unmount
+      if (document.head.contains(style)) {
+        document.head.removeChild(style);
+      }
+    };
+  }, []);
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      pointerEvents: 'none',
+      zIndex: 1,
+      overflow: 'hidden'
+    }}>
+      {snowflakes.map(flake => (
+        <div
+          key={flake.id}
+          className="snowflake"
+          style={{
+            left: `${flake.left}%`,
+            animationDelay: `${flake.delay}s`,
+            top: '-100px'
+          }}
+        >
+          ❄
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <div style={{
       minHeight: '100vh',
       background: 'linear-gradient(135deg, #1e293b 0%, #1e40af 50%, #3730a3 100%)',
       color: 'white',
-      fontFamily: 'Arial, sans-serif'
+      fontFamily: 'Arial, sans-serif',
+      position: 'relative'
     }}>
+      <SnowflakeEffect />
+      
       {/* Hero Section */}
       <section style={{
         minHeight: '100vh',
@@ -16,7 +90,9 @@ export default function Home() {
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        padding: '2rem'
+        padding: '1rem',
+        position: 'relative',
+        zIndex: 10
       }}>
         <h1 style={{
           fontSize: 'clamp(2rem, 8vw, 4rem)',
@@ -43,11 +119,12 @@ export default function Home() {
         
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '1.5rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+          gap: '1rem',
           width: '100%',
-          maxWidth: '800px',
-          marginBottom: '3rem'
+          maxWidth: '900px',
+          marginBottom: '3rem',
+          padding: '0 0.5rem'
         }}>
           <div style={{
             background: 'rgba(251, 191, 36, 0.1)',
@@ -83,14 +160,14 @@ export default function Home() {
 
       {/* Fortune Section */}
       <section style={{
-        padding: '4rem 2rem',
+        padding: 'clamp(2rem, 8vw, 4rem) clamp(1rem, 4vw, 2rem)',
         background: 'rgba(0,0,0,0.1)'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{
-            fontSize: 'clamp(2rem, 6vw, 3rem)',
+            fontSize: 'clamp(1.75rem, 6vw, 3rem)',
             fontWeight: 'bold',
-            marginBottom: '3rem',
+            marginBottom: 'clamp(2rem, 6vw, 3rem)',
             background: 'linear-gradient(to right, #fbbf24, #fcd34d, #fbbf24)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -101,8 +178,8 @@ export default function Home() {
           
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 'clamp(1rem, 3vw, 2rem)'
           }}>
             {[
               { icon: '🔮', title: 'Crystal Ball Readings', desc: 'Peer into the mystical crystal ball and discover your winter destiny.' },
@@ -127,14 +204,14 @@ export default function Home() {
 
       {/* Static Festival Info Section */}
       <section style={{
-        padding: '4rem 2rem',
+        padding: 'clamp(2rem, 8vw, 4rem) clamp(1rem, 4vw, 2rem)',
         background: 'linear-gradient(135deg, rgba(147, 51, 234, 0.3), rgba(59, 130, 246, 0.3))'
       }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{
-            fontSize: 'clamp(2rem, 6vw, 3rem)',
+            fontSize: 'clamp(1.75rem, 6vw, 3rem)',
             fontWeight: 'bold',
-            marginBottom: '2rem',
+            marginBottom: 'clamp(1.5rem, 4vw, 2rem)',
             background: 'linear-gradient(to right, #c084fc, #f472b6, #c084fc)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -145,46 +222,69 @@ export default function Home() {
           
           <div style={{
             background: 'rgba(147, 51, 234, 0.2)',
-            padding: '3rem',
+            padding: 'clamp(1.5rem, 6vw, 3rem)',
             borderRadius: '1rem',
             border: '1px solid rgba(147, 51, 234, 0.3)'
           }}>
-            <h3 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '2rem' }}>
+            <h3 style={{ 
+              fontSize: 'clamp(1.5rem, 5vw, 2.5rem)', 
+              fontWeight: 'bold', 
+              marginBottom: 'clamp(1.5rem, 4vw, 2rem)' 
+            }}>
               🎄 December 15th, 2026 🎄
             </h3>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-              gap: '2rem',
-              marginBottom: '2rem',
-              fontSize: '1.2rem'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+              gap: 'clamp(1rem, 3vw, 2rem)',
+              marginBottom: 'clamp(1.5rem, 4vw, 2rem)',
+              fontSize: 'clamp(1rem, 2.5vw, 1.2rem)'
             }}>
-              <div style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '0.5rem' }}>
+              <div style={{ 
+                background: 'rgba(255,255,255,0.1)', 
+                padding: 'clamp(0.75rem, 2vw, 1rem)', 
+                borderRadius: '0.5rem' 
+              }}>
                 📅<br />December 15th, 2026
               </div>
-              <div style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '0.5rem' }}>
+              <div style={{ 
+                background: 'rgba(255,255,255,0.1)', 
+                padding: 'clamp(0.75rem, 2vw, 1rem)', 
+                borderRadius: '0.5rem' 
+              }}>
                 🕕<br />6:00 PM - Late
               </div>
-              <div style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '0.5rem' }}>
+              <div style={{ 
+                background: 'rgba(255,255,255,0.1)', 
+                padding: 'clamp(0.75rem, 2vw, 1rem)', 
+                borderRadius: '0.5rem' 
+              }}>
                 ❄️<br />Winter Wonderland
               </div>
             </div>
-            <p style={{ lineHeight: '1.6', fontSize: '1.1rem' }}>
+            <p style={{ 
+              lineHeight: '1.6', 
+              fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
+              marginBottom: 'clamp(1.5rem, 4vw, 2rem)'
+            }}>
               Join us for magical fortune telling, enchanting storytelling, 
               delicious cacao ceremonies, and unforgettable winter memories!
             </p>
             
             <div style={{
-              marginTop: '2rem',
               background: 'rgba(251, 146, 60, 0.2)',
-              padding: '1.5rem',
+              padding: 'clamp(1rem, 3vw, 1.5rem)',
               borderRadius: '0.5rem',
               border: '1px solid rgba(251, 146, 60, 0.3)'
             }}>
-              <h4 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+              <h4 style={{ 
+                fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', 
+                fontWeight: 'bold', 
+                marginBottom: '1rem' 
+              }}>
                 🎟️ Early Bird Registration
               </h4>
-              <p>
+              <p style={{ fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>
                 Sign up for our newsletter to be the first to know when tickets go on sale! 
                 Early birds get special discounts and exclusive festival perks.
               </p>
