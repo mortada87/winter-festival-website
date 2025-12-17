@@ -36,7 +36,7 @@ export default function PhotoGallery() {
     // Winter Scenes
     {
       id: '1',
-      url: 'https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=400&h=400&fit=crop&auto=format',
       title: 'Snowy Winter Landscape',
       photographer: 'Ales Krivec',
       photographerUrl: 'https://unsplash.com/@aleskrivec',
@@ -45,7 +45,7 @@ export default function PhotoGallery() {
     },
     {
       id: '2',
-      url: 'https://images.unsplash.com/photo-1483307174149-0c7bbec08d04?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1483307174149-0c7bbec08d04?w=400&h=400&fit=crop&auto=format',
       title: 'Winter Forest Path',
       photographer: 'Simon Berger',
       photographerUrl: 'https://unsplash.com/@8moments',
@@ -54,7 +54,7 @@ export default function PhotoGallery() {
     },
     {
       id: '3',
-      url: 'https://images.unsplash.com/photo-1515036969-7e9b3ec0e20b?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1515036969-7e9b3ec0e20b?w=400&h=400&fit=crop&auto=format',
       title: 'Icicles and Snow',
       photographer: 'Todd Diemer',
       photographerUrl: 'https://unsplash.com/@todd_diemer',
@@ -64,7 +64,7 @@ export default function PhotoGallery() {
     // Festival Moments
     {
       id: '4',
-      url: 'https://images.unsplash.com/photo-1514782831304-632d814329f8?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1514782831304-632d814329f8?w=400&h=400&fit=crop&auto=format',
       title: 'Festive Winter Lights',
       photographer: 'Євгенія Височина',
       photographerUrl: 'https://unsplash.com/@eugenivy_now',
@@ -73,7 +73,7 @@ export default function PhotoGallery() {
     },
     {
       id: '5',
-      url: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=400&h=400&fit=crop&auto=format',
       title: 'Winter Celebration',
       photographer: 'Daria Nepriakhina',
       photographerUrl: 'https://unsplash.com/@epicantus',
@@ -82,7 +82,7 @@ export default function PhotoGallery() {
     },
     {
       id: '6',
-      url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop&auto=format',
       title: 'Magical Winter Market',
       photographer: 'Maarten van den Heuvel',
       photographerUrl: 'https://unsplash.com/@mvdheuvel',
@@ -92,7 +92,7 @@ export default function PhotoGallery() {
     // Cacao Ceremonies
     {
       id: '7',
-      url: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=400&fit=crop&auto=format',
       title: 'Hot Cacao Ritual',
       photographer: 'Joanna Kosinska',
       photographerUrl: 'https://unsplash.com/@joannakosinska',
@@ -101,7 +101,7 @@ export default function PhotoGallery() {
     },
     {
       id: '8',
-      url: 'https://images.unsplash.com/photo-1517911444677-26cfc8cc9b04?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1517911444677-26cfc8cc9b04?w=400&h=400&fit=crop&auto=format',
       title: 'Cacao Bean to Cup',
       photographer: 'Charisse Kenion',
       photographerUrl: 'https://unsplash.com/@charissek',
@@ -111,7 +111,7 @@ export default function PhotoGallery() {
     // Storytelling
     {
       id: '9',
-      url: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop&auto=format',
       title: 'Cozy Reading Corner',
       photographer: 'Thought Catalog',
       photographerUrl: 'https://unsplash.com/@thoughtcatalog',
@@ -120,7 +120,7 @@ export default function PhotoGallery() {
     },
     {
       id: '10',
-      url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&auto=format',
       title: 'Fireside Stories',
       photographer: 'Joshua Ness',
       photographerUrl: 'https://unsplash.com/@theexplorerdad',
@@ -129,7 +129,7 @@ export default function PhotoGallery() {
     },
     {
       id: '11',
-      url: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
+      url: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=400&fit=crop&auto=format',
       title: 'Ancient Winter Tales',
       photographer: 'Alfons Morales',
       photographerUrl: 'https://unsplash.com/@alfonsmc10',
@@ -220,6 +220,19 @@ export default function PhotoGallery() {
                     src={photo.url}
                     alt={photo.alt}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    crossOrigin="anonymous"
+                    loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = `data:image/svg+xml;base64,${btoa(`
+                        <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+                          <rect width="400" height="400" fill="#1e293b"/>
+                          <text x="50%" y="50%" text-anchor="middle" dy="0.3em" fill="#64748b" font-family="Arial" font-size="16">
+                            ${photo.title}
+                          </text>
+                        </svg>
+                      `)}`;
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -264,6 +277,18 @@ export default function PhotoGallery() {
                 src={selectedPhoto.url}
                 alt={selectedPhoto.alt}
                 className="w-full h-auto max-h-[70vh] object-cover"
+                crossOrigin="anonymous"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = `data:image/svg+xml;base64,${btoa(`
+                    <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="800" height="600" fill="#1e293b"/>
+                      <text x="50%" y="50%" text-anchor="middle" dy="0.3em" fill="#64748b" font-family="Arial" font-size="24">
+                        ${selectedPhoto.title}
+                      </text>
+                    </svg>
+                  `)}`;
+                }}
               />
             </div>
             
