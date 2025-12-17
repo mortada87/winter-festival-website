@@ -42,15 +42,9 @@ export default function CountdownTimer() {
         const now = new Date();
         const currentYear = now.getFullYear();
         
-        // Set the festival date to December 15th of next year
-        let targetYear = currentYear;
-        const thisYearFestival = new Date(currentYear, 11, 15); // December 15th this year
-        
-        if (now > thisYearFestival) {
-          targetYear = currentYear + 1;
-        }
-        
-        const nextFestival = new Date(targetYear, 11, 15, 18, 0, 0); // December 15th at 6 PM
+        // Always target December 15th of the next year (2026)
+        const targetYear = currentYear + 1;
+        const nextFestival = new Date(targetYear, 11, 15, 18, 0, 0); // December 15th, 2026 at 6 PM
         const difference = nextFestival.getTime() - now.getTime();
 
         if (difference > 0) {
@@ -61,6 +55,7 @@ export default function CountdownTimer() {
             seconds: Math.floor((difference / 1000) % 60)
           });
         } else {
+          // Fallback if somehow still negative
           setTimeLeft({ days: 365, hours: 0, minutes: 0, seconds: 0 });
         }
       } catch (error) {
@@ -167,7 +162,7 @@ export default function CountdownTimer() {
             <div className="grid md:grid-cols-3 gap-6 text-purple-100">
               <div className="flex items-center justify-center">
                 <Calendar className="w-5 h-5 mr-2 text-purple-300" />
-                <span>December 15th, 2025</span>
+                <span>December 15th, 2026</span>
               </div>
               <div className="flex items-center justify-center">
                 <Clock className="w-5 h-5 mr-2 text-purple-300" />
