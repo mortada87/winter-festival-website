@@ -3,10 +3,18 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-display: swap;
   }
   
   body {
     @apply overflow-x-hidden;
+    font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Optimize font rendering */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
