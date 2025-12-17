@@ -32,54 +32,63 @@ export default function CountdownTimer() {
     minutes: 0,
     seconds: 0
   });
-  const [mounted, setMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
+    setIsMounted(true);
+    
     const calculateTimeLeft = () => {
-      const now = new Date();
-      const currentYear = now.getFullYear();
-      
-      // Set the festival date to December 15th of next year (around the same period)
-      // If we're past December 15th this year, target next year; otherwise target this year
-      let targetYear = currentYear;
-      const thisYearFestival = new Date(currentYear, 11, 15); // December 15th this year
-      
-      if (now > thisYearFestival) {
-        targetYear = currentYear + 1;
-      }
-      
-      const nextFestival = new Date(targetYear, 11, 15, 18, 0, 0); // December 15th at 6 PM
-      const difference = nextFestival.getTime() - now.getTime();
+      try {
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        
+        // Set the festival date to December 15th of next year
+        let targetYear = currentYear;
+        const thisYearFestival = new Date(currentYear, 11, 15); // December 15th this year
+        
+        if (now > thisYearFestival) {
+          targetYear = currentYear + 1;
+        }
+        
+        const nextFestival = new Date(targetYear, 11, 15, 18, 0, 0); // December 15th at 6 PM
+        const difference = nextFestival.getTime() - now.getTime();
 
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60)
-        });
-      } else {
-        // If somehow we're at the exact festival time, reset to next year
+        if (difference > 0) {
+          setTimeLeft({
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+            minutes: Math.floor((difference / 1000 / 60) % 60),
+            seconds: Math.floor((difference / 1000) % 60)
+          });
+        } else {
+          setTimeLeft({ days: 365, hours: 0, minutes: 0, seconds: 0 });
+        }
+      } catch (error) {
+        console.warn('Error calculating time:', error);
         setTimeLeft({ days: 365, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
-    calculateTimeLeft(); // Calculate immediately
+    calculateTimeLeft();
     const timer = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(timer);
   }, []);
 
-  // Don't render until mounted to avoid hydration mismatch
-  if (!mounted) {
+  // Don't render countdown until mounted to prevent hydration issues
+  if (!isMounted) {
     return (
-      <section className="py-20 px-4 relative z-10">
+      <section id="countdown" className="py-20 px-4 relative z-10 bg-gradient-to-br from-purple-900/30 via-blue-900/30 to-indigo-900/30">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="text-4xl md:text-6xl font-bold text-white">Loading...</div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">Next Festival Countdown</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="bg-white/10 rounded-xl p-6">
+                <div className="text-4xl md:text-6xl font-bold text-white">--</div>
+                <div className="text-purple-200">Loading...</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     );

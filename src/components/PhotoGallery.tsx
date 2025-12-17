@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Camera, X, ExternalLink } from 'lucide-react';
-import Image from 'next/image';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -109,18 +108,9 @@ export default function PhotoGallery() {
       category: 'cacao-ceremonies',
       alt: 'Cacao beans and chocolate making process'
     },
-    {
-      id: '9',
-      url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80',
-      title: 'Winter Cacao Gathering',
-      photographer: 'Stephanie Harvey',
-      photographerUrl: 'https://unsplash.com/@stephanieharvey',
-      category: 'cacao-ceremonies',
-      alt: 'Group enjoying cacao ceremony in winter setting'
-    },
     // Storytelling
     {
-      id: '10',
+      id: '9',
       url: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
       title: 'Cozy Reading Corner',
       photographer: 'Thought Catalog',
@@ -129,7 +119,7 @@ export default function PhotoGallery() {
       alt: 'Cozy reading corner with books and warm lighting'
     },
     {
-      id: '11',
+      id: '10',
       url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
       title: 'Fireside Stories',
       photographer: 'Joshua Ness',
@@ -138,7 +128,7 @@ export default function PhotoGallery() {
       alt: 'People gathered around fireplace for storytelling'
     },
     {
-      id: '12',
+      id: '11',
       url: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
       title: 'Ancient Winter Tales',
       photographer: 'Alfons Morales',
@@ -226,11 +216,10 @@ export default function PhotoGallery() {
                 onClick={() => setSelectedPhoto(photo)}
               >
                 <div className="relative aspect-square overflow-hidden">
-                  <Image
+                  <img
                     src={photo.url}
                     alt={photo.alt}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -271,12 +260,10 @@ export default function PhotoGallery() {
             </button>
             
             <div className="relative">
-              <Image
+              <img
                 src={selectedPhoto.url}
                 alt={selectedPhoto.alt}
-                width={800}
-                height={600}
-                className="w-full h-auto"
+                className="w-full h-auto max-h-[70vh] object-cover"
               />
             </div>
             
@@ -284,7 +271,7 @@ export default function PhotoGallery() {
               <h3 className="text-2xl font-bold text-white mb-2">{selectedPhoto.title}</h3>
               <div className="flex items-center justify-between">
                 <p className="text-cyan-200">
-                  Photo by {' '}
+                  Photo by{' '}
                   <a
                     href={selectedPhoto.photographerUrl}
                     target="_blank"
